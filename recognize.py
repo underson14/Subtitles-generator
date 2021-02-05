@@ -38,7 +38,7 @@ def recognize(wav_filename):
 
 def get_audio(video):
     os.system('ffmpeg -y  -threads 4\
- -i {} -f wav -ab 192000 -vn {}'.format(video, 'current.wav'))
+ -i {} -f wav -ab 192000 -vn {}'.format(video, '/content/Subtitles-generator/current.wav'))
 
 def split_into_frames(audiofile):
     data, sr = librosa.load(audiofile)
@@ -46,14 +46,14 @@ def split_into_frames(audiofile):
     print('video duration, hours: {}'.format(duration/3600))
     for i in range(0,int(duration-1),50):
         tmp_batch = data[(i)*sr:sr*(i+50)]
-        librosa.output.write_wav('samples/{}.wav'.format(chr(int(i/50)+65)), tmp_batch, sr)
+        librosa.output.write_wav('/content/Subtitles-generator/samples/{}.wav'.format(chr(int(i/50)+65)), tmp_batch, sr)
 
 if __name__ == '__main__':
     start = time.time()
     args = get_arguments()
     get_audio(args.video)
-    split_into_frames('current.wav')
-    files = sorted(glob('samples/*.wav'))
+    split_into_frames('/content/Subtitles-generator/current.wav')
+    files = sorted(glob('/content/Subtitles-generator/samples/*.wav'))
     print(files)
     open('result.txt', 'w', encoding = 'utf-8').write('')
     for file in files:
@@ -61,4 +61,4 @@ if __name__ == '__main__':
         recognize(file)
     end = time.time()
     print('elapsed time: {}'.format(end - start))
-    os.system('rm samples/*')
+    os.system('rm /content/Subtitles-generator/samples/*')
