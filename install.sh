@@ -1,5 +1,6 @@
 python -m pip install --upgrade pip
-pip uninstall numpy -y
+pip install umap-learn
+pip install pynndescent
 pip install numpy==1.15.1
 pip uninstall librosa -y
 pip install librosa==0.6.2
