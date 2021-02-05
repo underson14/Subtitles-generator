@@ -27,7 +27,7 @@ def recognize(wav_filename):
     print('audiofile loaded')
 
     try:
-        result = r.recognize_google(audio, language = 'ru').lower()
+        result = r.recognize_google(audio, language = 'en').lower()
     except sr.UnknownValueError:
         print("cannot understand audio")
         result = ''
